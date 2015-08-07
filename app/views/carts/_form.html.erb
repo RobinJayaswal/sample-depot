@@ -1,0 +1,35 @@
+<%= form_for(@cart) do |f| %>
+  <% if @cart.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@cart.errors.count, "error") %> prohibited this cart from being saved:</h2>
+
+      <ul>
+      <% @cart.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+	
+  <table>
+  <% @cart.line_items.each do |line_item| %>
+  	<tr>
+  		<td>
+  			<%= line_item.product.title %>
+  		</td>
+  		<td class = "list_actions">
+  			<%= link_to 'Details', line_item.product %>  <!-- "/products/#{line_item.product}/consumer"%> -->
+  		</td>
+		
+		<td>
+			<%= link_to 'Remove From Cart', line_item, confirm: 'Are you 
+			sure?', method: :delete, data: {disable_with: "Removing..."}%>
+		</td>
+			
+  <%end%>
+  </table>
+  
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
