@@ -10,4 +10,12 @@ class Cart < ActiveRecord::Base
     end
     item
   end
+  
+  def cart_price
+    cart_price = 0
+    line_items.each do |item|
+      cart_price += item.line_price
+    end
+    cart_price
+  end
 end

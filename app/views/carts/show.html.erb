@@ -3,8 +3,11 @@
 <h2> Sir, Your Cart </h2>
 <ul>
 	<% @cart.line_items.each do |item| %>
-	<li><%= item.quantity %> &times; <%= item.product.title %> </li>
+	<li><%= item.quantity %> &times; <%= item.product.title %>         Price: <%=number_to_currency(item.line_price)%> </li>
 	<% end %>
 </ul>
+
+<p> Total Price: <%=number_to_currency(@cart.cart_price)%>
+
 <%= link_to 'Edit', edit_cart_path(@cart) %> |
 <%= link_to 'Back', store_path %>
