@@ -1,0 +1,8 @@
+<h2> Sir, Your Cart </h2>
+<ul>
+	<%= render(@cart.line_items)%>
+</ul>
+
+<p> Total Price: <%=number_to_currency(@cart.cart_price)%>
+
+<%= link_to 'Edit', edit_cart_path(@cart) %> |
