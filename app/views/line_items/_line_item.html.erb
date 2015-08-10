@@ -1,1 +1,6 @@
-<li><%= line_item.quantity %> &times; <%= line_item.product.title %> Price: <%=number_to_currency(line_item.line_price)%> </li>
+<% if @current_item == line_item %>
+<li id="current_item">
+<% else %>
+<li>
+<%end%>
+<%= line_item.quantity %> &times; <%= line_item.product.title %> Price: <%=number_to_currency(line_item.line_price)%> </li>

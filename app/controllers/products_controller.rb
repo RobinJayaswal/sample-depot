@@ -7,6 +7,7 @@ class ProductsController < ApplicationController
   def index
     @products = Product.all
     @time = Time.now
+    @cart = current_cart
   end
 
   # GET /products/1
@@ -20,6 +21,7 @@ class ProductsController < ApplicationController
   
   # GET /products/new
   def new
+    @cart = current_cart
     @product = Product.new
   end
 
