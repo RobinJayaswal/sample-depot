@@ -20,7 +20,31 @@ class LineItemsController < ApplicationController
   # GET /line_items/1/edit
   def edit
   end
-
+  
+  def remove
+    @cart = current_cart
+    @line_item = LineItem.find(params[:item])
+    if @line_item
+      if @line_item.quantity == 1
+        @line_item.destroy
+        respond_to do |format|
+          format.html {redirect_to store_url }
+          format.js { @current_item = @line_item }
+          format.json { head :no_content }
+        end
+      else
+        @line_item.quantity -= 1
+        respond_to do |format|
+          if @line_item.save
+            format.html { redirect_to store_url }
+            format.js { @current_item = @line_item }
+            format.json { head :no_content}
+          end
+        end
+      end
+    end
+  end
+        
   # POST /line_items
   # POST /line_items.json
   def create

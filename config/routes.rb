@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   # root 'welcome#index'
   
   root 'store#index', as: 'store'
+  
+  post 'removeItem', to: 'line_items#remove'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
