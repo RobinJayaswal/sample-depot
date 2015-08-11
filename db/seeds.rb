@@ -7,7 +7,6 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 
-
 Product.create(title: 'All of Teis\' Stuff',
 description: '<p>Everything</p>',
 image_url: 'Teis.jpg',
@@ -22,4 +21,9 @@ image_url: 'remote.jpg',
 price: '100000.00'
 )
 
+Order.destroy_all
 
+(1..100).each do |i|
+  Order.create(name: "Customer #{i}", address: "#{i} street", 
+  email: "customer-#{i}@example.com", pay_type: "Check")
+end
