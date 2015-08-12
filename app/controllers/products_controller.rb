@@ -78,6 +78,7 @@ class ProductsController < ApplicationController
     respond_to do |format|
       format.html
       format.atom
+      format.xml {render xml: @product.to_xml(include: :orders)}
     end
   end
   private
