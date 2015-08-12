@@ -6,4 +6,10 @@
 <p> Total Price: <%=number_to_currency(@cart.cart_price)%>
 
 <%= link_to 'Edit', edit_cart_path(@cart) %>
-<%= button_to "Checkout", new_order_path, method: :get %>
+<% if (current_page?(controller: 'orders', action: 'new')) %>
+	<% @current_view_checkout = true %>
+<% else %>
+	<% @current_view_checkout = false %>
+<% end %>
+
+<%= button_to "Checkout", new_order_path, method: :get, disabled: @current_view_checkout %>
