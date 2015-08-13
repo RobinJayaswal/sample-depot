@@ -10,6 +10,7 @@ class CartsController < ApplicationController
   # GET /carts/1
   # GET /carts/1.json
   def show
+    
   end
 
   # GET /carts/new
@@ -68,8 +69,10 @@ class CartsController < ApplicationController
       begin
         @cart = Cart.find(params[:id])
       rescue ActiveRecord::RecordNotFound
-        logger.error "Attempt to access nonexistent cart #{params[:id]}"
+        error = "Attempt to access nonexistent cart #{params[:id]}"
+        logger.error error
         redirect_to store_url, notice: "Cart does not exist"
+        ErrorNotifier.bad_cart(error).deliver
       end
         
     end
