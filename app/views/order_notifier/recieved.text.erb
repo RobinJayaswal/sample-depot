@@ -1,0 +1,10 @@
+Hello <%=@order.name%>
+
+Thank you for your recent order of the following items:
+
+<%= render @order.line_items %>
+
+The order is being shipped to @order.address as we speak.
+
+Thanks,
+Jayaswal Industries

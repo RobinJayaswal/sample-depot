@@ -1,0 +1,14 @@
+<h1>Order Recieved</h1>
+
+<p> We are pleased to inform you that your order has been placed. We took a $1,000 transaction fee, we hope you do not mind. </p>
+
+<p>
+	<% @from_email = true %>
+  	<%= render @order.line_items %>
+</p>
+
+
+<p>
+	Thanks,
+	Robin Jayaswal
+</p>
