@@ -15,6 +15,7 @@ class SessionsController < ApplicationController
       end
     else
       redirect_to url_for(:controller => :users, :action => :create, :name => params[:name], :password => params[:password], :password_confirmation => params[:password])
+    end
   end
 
   def destroy
