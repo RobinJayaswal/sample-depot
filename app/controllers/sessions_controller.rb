@@ -14,7 +14,6 @@ class SessionsController < ApplicationController
         redirect_to login_url, notice: "Incorrect Login"
       end
     else
-      params[:first_user] = true
       redirect_to url_for(:controller => :users, :action => :create, :name => params[:name], :password => params[:password], :password_confirmation => params[:password])
     end
   end

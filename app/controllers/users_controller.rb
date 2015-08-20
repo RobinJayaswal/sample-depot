@@ -1,9 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  
-  if params[:first_user] == true
-    skip_before_filter :authorize
-  end
+  skip_before_filter :authorize, only: [:create]
   
   # GET /users
   # GET /users.json
@@ -33,19 +30,23 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    count = User.count
-    @user = User.new(user_params)
+    unless User.find_by_id(session[:user_id]) || User.count == 0
+      redirect_to login_url, notice: "You must log in to access this page"
+    else
+      count = User.count
+      @user = User.new(user_params)
 
-    respond_to do |format|
-      if @user.save
-        if count == 0
+      respond_to do |format|
+        if @user.save
+          if count == 0
           session[:user_id] = @user.id
+          end
+          format.html { redirect_to users_url, notice: "User #{@user.name} was successfully created." }
+          format.json { render :show, status: :created, location: @user }
+        else
+          format.html { render :new }
+          format.json { render json: @user.errors, status: :unprocessable_entity }
         end
-        format.html { redirect_to users_url, notice: "User #{@user.name} was successfully created." }
-        format.json { render :show, status: :created, location: @user }
-      else
-        format.html { render :new }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
   end
