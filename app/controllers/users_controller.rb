@@ -1,6 +1,10 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-
+  
+  if params[:first_user] == true
+    skip_before_filter :authorize
+  end
+  
   # GET /users
   # GET /users.json
   def index
