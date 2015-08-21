@@ -5,6 +5,7 @@ class SessionsController < ApplicationController
   end
 
   def create
+    logger.info "pressed create"
     if User.count != 0
       user = User.find_by_name(params[:name])
       if user and user.authenticate(params[:password])
