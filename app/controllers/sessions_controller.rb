@@ -14,6 +14,7 @@ class SessionsController < ApplicationController
         redirect_to login_url, notice: "Incorrect Login"
       end
     else
+      logger.info "User count is zero, sending to users controller"
       redirect_to url_for(:controller => :users, :action => :create, :name => params[:name], :password => params[:password], :password_confirmation => params[:password])
     end
   end

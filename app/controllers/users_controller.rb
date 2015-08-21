@@ -35,15 +35,18 @@ class UsersController < ApplicationController
     else
       count = User.count
       @user = User.new(user_params)
-
+      logger.info "Got to creating a new user, not yet saved"
       respond_to do |format|
         if @user.save
           if count == 0
-          session[:user_id] = @user.id
+            logger.info "count still zero, and now setting user_id in session"
+            session[:user_id] = @user.id
           end
+          logger.info "saved now, should have set session to user id. Sending to users_url"
           format.html { redirect_to users_url, notice: "User #{@user.name} was successfully created." }
           format.json { render :show, status: :created, location: @user }
         else
+          logger.info "could not save user"
           format.html { render :new }
           format.json { render json: @user.errors, status: :unprocessable_entity }
         end
