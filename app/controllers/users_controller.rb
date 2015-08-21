@@ -31,7 +31,7 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     unless User.find_by_id(session[:user_id]) || User.count == 0
-      redirect_to login_url, notice: "You must log in to access this page"
+      redirect_to login_url, notice: "error by robin: must log in"
     else
       count = User.count
       @user = User.new(user_params)
