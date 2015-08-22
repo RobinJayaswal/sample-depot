@@ -5,7 +5,6 @@ class SessionsController < ApplicationController
   end
 
   def create
-    User.destroy_all
     if User.count.zero?
       user = User.create(name: params[:name], password: params[:password], password_confirmation: params[:password])
     else

@@ -5,13 +5,8 @@
 <h1> Jayaswal Industries Catalog </h1>
 <p> You have visited this site 
 	<%= pluralize(session[:counter], "time")%> without buying something </p>
-<% if session[:counter] < 3 %>
+
 	<p> Welcome! </p>
-<% elsif session[:counter] < 6 %>
-	<p> Better Get Something Soon... </p>
-<% else %>
-	<p> You Asshole </p>
-<% end %>
 
 <% @products.each do |product| %>
 	<div class = "entry">
